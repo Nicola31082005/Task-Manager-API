@@ -22,7 +22,7 @@ app.use(cookieParser())
 DbConnect()
 
 // Handlebars config
-app.engine('hbs', handlebars.engine({ extname: 'hbs', }));
+app.engine('hbs', handlebars.engine({ extname: 'hbs', runtimeOptions: { allowProtoPropertiesByDefault: true }}));
 app.set('view engine', 'hbs');
 app.set('views', path.join(process.cwd(), 'src', 'views'))
 
