@@ -4,7 +4,7 @@ import { Request, Response } from "express";
 const homeController = Router();
 
 homeController.get('/', (req: Request, res: Response) => {
-    res.send('App initialize')
+    res.render('home')
  })
  
 
