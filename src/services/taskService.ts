@@ -14,7 +14,6 @@ export async function getOneUserTask(taskId: string) {
     return task
 }
 
-
 export async function createTask(title: string, description: string, userId: Types.ObjectId) {
     
     if (!title) {
@@ -22,5 +21,13 @@ export async function createTask(title: string, description: string, userId: Typ
     }
     
     return await Task.create({ title, description, userId })
+}
 
+export async function updateTask(title: string, description: string, completed: boolean, taskId: string) {
+    
+    if (!title) {
+        throw new Error('Title is required.')
+    }
+
+    return await Task.updateOne({_id: taskId}, { title, description, completed })
 }
