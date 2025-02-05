@@ -8,11 +8,11 @@ import UserData from "../types/user-type.js";
 const authController = Router();
 
 authController.get('/login', (req: Request, res: Response) => {
-    res.render('auth/login')
+    res.render('auth/login', { title: 'Login' })
 })
 
 authController.get('/register', (req: Request, res: Response) => {
-    res.render('auth/register')
+    res.render('auth/register', { title: 'Register' })
 })
 
 authController.post('/register', async (req: Request, res: Response) => {
