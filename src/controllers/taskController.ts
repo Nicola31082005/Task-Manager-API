@@ -1,5 +1,6 @@
 import { Router, Request, Response } from "express";
-import { createTask, getAllUserTasks } from "../services/taskService.js";
+import { createTask, getAllUserTasks, getOneUserTask } from "../services/taskService.js";
+import { Types } from "mongoose";
 
 const taskController = Router();
 
@@ -36,8 +37,17 @@ taskController.post('/create', async (req: Request, res: Response) => {
     } catch (error) {
         console.error(error)
     }
+})
 
+taskController.get('/edit/:id', async (req: Request, res: Response) => {
+    try {
+        const taskId = req.params.id
 
+        const task = await getOneUserTask(taskId)
+        res.render('tasks/edit-task', { task })
+    } catch (error) {
+        
+    }
 })
 
 

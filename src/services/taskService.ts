@@ -8,6 +8,13 @@ export async function getAllUserTasks(userId: Types.ObjectId) {
     return tasks
 }
 
+export async function getOneUserTask(taskId: string) {
+    const task = await Task.findOne({_id: taskId})
+    
+    return task
+}
+
+
 export async function createTask(title: string, description: string, userId: Types.ObjectId) {
     
     if (!title) {
