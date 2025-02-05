@@ -2,7 +2,6 @@ import { Router } from "express";
 import { Request, Response } from "express";
 import { login, register } from "../services/authService.js";
 import UserData from "../types/user-type.js";
-import cookieParser from "cookie-parser";
 
 
 
@@ -30,9 +29,6 @@ authController.post('/register', async (req: Request, res: Response) => {
 
 authController.post('/login', async (req: Request, res: Response) => {
     const {email, password}: UserData = req.body;
-
-    console.log(email, password);
-    
     
     try {
         const token = await login(email, password)

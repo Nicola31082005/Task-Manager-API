@@ -1,10 +1,11 @@
-import express, { Application, Request, Response } from 'express';
+import express, { Application } from 'express';
 import handlebars from 'express-handlebars';
 import routes from './routes.js';
 import path from 'path';
 import 'dotenv/config';
 import helmet from 'helmet';
 import DbConnect from './config/db.js';
+import cookieParser from 'cookie-parser';
 
 const app: Application = express();
 
@@ -13,7 +14,9 @@ const app: Application = express();
 app.use(helmet())
 
 // Body parser middleware
-app.use(express.urlencoded({ extended: false} ))
+app.use(express.urlencoded({ extended: false }));
+
+app.use(cookieParser())
 
 // Connect with DB
 DbConnect()

@@ -31,12 +31,11 @@ export async function login(email: string, password: string){
     if (!isValid) {
         throw new Error('Email or Password don\'t match!')
     }
-
-    console.log(JWT_SECRET);
     
     const payload = { id: user._id, email: user.email }
     const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '2h' });
 
     return token;    
 } 
+
 
