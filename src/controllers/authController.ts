@@ -1,13 +1,8 @@
 import { Router } from "express";
 import { Request, Response } from "express";
-import { log } from "node:console";
+import { register } from "../services/authService.js";
+import UserData from "../types/user-type.js";
 
-interface User {
-    email: string,
-    password: number,
-    confirmPassword?: number,
-    name?: string,
-}
 
 const authController = Router();
 
@@ -19,15 +14,13 @@ authController.get('/register', (req: Request, res: Response) => {
     res.render('auth/register')
 })
 
-authController.post('/register', (req: Request, res: Response) => {
-    const data: User = req.body;
+authController.post('/register', async (req: Request, res: Response) => {
+    const data: UserData = req.body;
     
-    console.log(data);
+    await register(data)
 
     res.end()
     
-
-
 })
 
 export default authController
