@@ -4,11 +4,16 @@ import routes from './routes.js';
 import path from 'path';
 import 'dotenv/config';
 import helmet from 'helmet';
+import DbConnect from './config/db.js';
 
 const app: Application = express();
 
+
 // Secure vulnurability
 app.use(helmet())
+
+// Connect with DB
+DbConnect()
 
 // Handlebars config
 app.engine('hbs', handlebars.engine({ extname: 'hbs', }));
