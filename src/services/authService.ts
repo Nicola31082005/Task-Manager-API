@@ -2,7 +2,7 @@ import User from "../models/user-model.js"
 import UserData from "../types/user-type.js"
 import bcrypt from 'bcrypt';
 import jwt, { Secret } from 'jsonwebtoken';
-
+import 'dotenv/config'
 
 const JWT_SECRET: Secret = process.env.JWT_SECRET!;
 
@@ -32,6 +32,8 @@ export async function login(email: string, password: string){
         throw new Error('Email or Password don\'t match!')
     }
 
+    console.log(JWT_SECRET);
+    
     const payload = { id: user._id, email: user.email }
     const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '2h' });
 
