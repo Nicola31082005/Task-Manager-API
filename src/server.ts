@@ -2,8 +2,13 @@ import express, { Application, Request, Response } from 'express';
 import handlebars from 'express-handlebars';
 import routes from './routes.js';
 import path from 'path';
+import 'dotenv/config';
+import helmet from 'helmet';
 
 const app: Application = express();
+
+// Secure vulnurability
+app.use(helmet())
 
 // Handlebars config
 app.engine('hbs', handlebars.engine({ extname: 'hbs', }));
@@ -14,5 +19,5 @@ app.set('views', path.join(process.cwd(), 'src', 'views'))
 app.use(express.static(path.join(process.cwd(), "public")))
 app.use(routes)
 
-
-app.listen(2000, () => console.log('Server is listening on port: 2000'))
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => console.log(`Server is listening on port: ${PORT}`))
