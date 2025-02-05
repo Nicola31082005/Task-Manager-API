@@ -40,4 +40,10 @@ authController.post('/login', async (req: Request, res: Response) => {
 
 })
 
+authController.get('/logout', async (req: Request, res: Response) => {
+    res.clearCookie('auth');
+    
+    res.redirect('/')
+})
+
 export default authController
