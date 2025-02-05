@@ -3,14 +3,13 @@ import UserData from "../types/user-type.js"
 
 
 export async function register(data: UserData){
-    try {
         if (!data) return
-        await User.create(data)
-    } catch (error) {
-        console.error(error)
-    }
-    
-    
-    
+
+        const counts = await User.countDocuments({ email: data.email })        
+        if (counts > 0) {
+            throw new Error('Email is already taken.')
+        }
+
+        return await User.create(data)    
 } 
 
