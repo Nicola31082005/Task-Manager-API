@@ -1,6 +1,6 @@
 export default interface UserData {
     email: string,
-    password: number,
-    confirmPassword?: number,
+    password: string,
+    confirmPassword?: string,
     name?: string,
 }

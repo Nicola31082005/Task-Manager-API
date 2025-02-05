@@ -1,4 +1,5 @@
 import { Schema, model } from 'mongoose';
+import bcrypt from 'bcrypt';
 
 const userSchema = new Schema({
     name: { 
@@ -23,6 +24,14 @@ userSchema.virtual('confirmPassword')
             throw new Error('Passwords missmatch!')
         }
     })
+
+userSchema.pre('save', async function () {
+    try {
+        this.password = await bcrypt.hash(this.password, 10)
+    } catch (error) {
+        console.error(error)
+    }
+})
 
 const User = model('User', userSchema)
 
