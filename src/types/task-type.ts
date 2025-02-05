@@ -1,7 +1,9 @@
-export default interface Task {
+import { Types } from "mongoose"
+
+export default interface TaskInterface {
     title: string,
     description?: string,
     completed: boolean,
     createdAt: Date,
-    userId: string
+    userId: Types.ObjectId
 }
