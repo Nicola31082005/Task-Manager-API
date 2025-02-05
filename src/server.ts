@@ -12,6 +12,9 @@ const app: Application = express();
 // Secure vulnurability
 app.use(helmet())
 
+// Body parser middleware
+app.use(express.urlencoded({ extended: false} ))
+
 // Connect with DB
 DbConnect()
 
@@ -19,6 +22,7 @@ DbConnect()
 app.engine('hbs', handlebars.engine({ extname: 'hbs', }));
 app.set('view engine', 'hbs');
 app.set('views', path.join(process.cwd(), 'src', 'views'))
+
 
 // Serve static files
 app.use(express.static(path.join(process.cwd(), "public")))
