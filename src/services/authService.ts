@@ -20,21 +20,14 @@ export async function register(data: UserData){
 export async function login(email: string, password: string){
     if (!email || !password) return
 
-    console.log(email, password);
-    
-
     const user = await User.findOne({ email });
 
     if (!user) {
         throw new Error('Email or Password don\'t match!');
     }
 
-    console.log('hi');
     const isValid = await bcrypt.compare(password, user.password);
     
-    console.log(isValid);
-    
-
     if (!isValid) {
         throw new Error('Email or Password don\'t match!')
     }
