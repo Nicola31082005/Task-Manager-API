@@ -20,10 +20,9 @@ authController.post('/register', async (req: Request, res: Response) => {
     
     try {
         await register(data)
-        res.redirect('/auth/login')
+        res.redirect('/auth/register')
     } catch (error) {
-        console.error(error)
-        res.end()
+        res.status(400).render('auth/register', { title: 'Register', error: error })      
     }
 })
 
@@ -35,7 +34,7 @@ authController.post('/login', async (req: Request, res: Response) => {
         res.cookie('auth', token, { httpOnly: true })
         res.redirect('/')
     } catch (error) {
-        console.error(error)
+        res.status(400).render('auth/login', { title: 'Login', error: error })      
     }
 
 })
