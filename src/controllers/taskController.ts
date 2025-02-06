@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import { createTask, getAllUserTasks, getOneUserTask, updateTask } from "../services/taskService.js";
+import { createTask, deleteTask, getAllUserTasks, getOneUserTask, updateTask } from "../services/taskService.js";
 
 const taskController = Router();
 
@@ -57,6 +57,17 @@ taskController.post('/edit/:id', async (req: Request, res: Response) => {
         
 
         const task = await updateTask(title, description, completed, taskId)
+        res.redirect('/tasks')
+    } catch (error) {
+        console.error(error)
+    }
+})
+
+taskController.post('/delete/:id', async (req: Request, res: Response) => {
+    try {
+        const taskId = req.params.id
+        await deleteTask(taskId)
+        
         res.redirect('/tasks')
     } catch (error) {
         console.error(error)

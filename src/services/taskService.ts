@@ -31,3 +31,7 @@ export async function updateTask(title: string, description: string, completed: 
 
     return await Task.updateOne({_id: taskId}, { title, description, completed })
 }
+
+export async function deleteTask(taskId: string) {
+    return await Task.deleteOne({ _id: taskId })
+}
