@@ -1,12 +1,12 @@
 {
   "name": "new",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/src/server.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc",
-    "dev": "npx concurrently \"npx tsc -w\"  \"nodemon dist/server.js\""
+    "dev": "npx concurrently \"npx tsc -w\"  \"nodemon dist/src/server.js\""
   },
   "keywords": [],
   "author": "",
