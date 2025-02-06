@@ -18,7 +18,7 @@ taskController.get('/', async (req: Request, res: Response) => {
         const userTasks = await getAllUserTasks(userId)
         res.render('tasks/tasks', { tasks: userTasks, title: 'Tasks' })
     } catch (error) {
-        console.error(error)
+        res.status(400).render('home', { title: 'Task Manager', error: error })
     }
 })
 
@@ -34,7 +34,7 @@ taskController.post('/create', async (req: Request, res: Response) => {
         res.redirect('/tasks')
 
     } catch (error) {
-        console.error(error)
+        res.status(400).render('home', { title: 'Task Manager', error: error })
     }
 })
 
@@ -45,7 +45,7 @@ taskController.get('/edit/:id', async (req: Request, res: Response) => {
         const task = await getOneUserTask(taskId)
         res.render('tasks/edit-task', { task, title: 'Edit Task' })
     } catch (error) {
-        console.error(error)
+        res.status(400).render('home', { title: 'Task Manager', error: error })
     }
 })
 
@@ -58,8 +58,10 @@ taskController.post('/edit/:id', async (req: Request, res: Response) => {
 
         const task = await updateTask(title, description, completed, taskId)
         res.redirect('/tasks')
-    } catch (error) {
-        console.error(error)
+    } catch (error) {        
+        const taskId = req.params.id
+        const task = await getOneUserTask(taskId)
+        res.status(400).render('tasks/edit-task', { task, title: 'Edit Task', error: error })
     }
 })
 
@@ -70,7 +72,7 @@ taskController.post('/delete/:id', async (req: Request, res: Response) => {
         
         res.redirect('/tasks')
     } catch (error) {
-        console.error(error)
+        res.status(400).render('home', { title: 'Task Manager', error: error })
     }
 })
 
