@@ -1,12 +1,22 @@
 <div class="container mt-5">
   <h1 class="mb-4">Task Manager</h1>
-  
+
   <form action="/tasks/create" method="POST" class="mb-3">
     <div class="mb-2">
-      <input type="text" name="title" class="form-control" placeholder="New Task" required>
+      <input
+        type="text"
+        name="title"
+        class="form-control"
+        placeholder="New Task"
+        required
+      />
     </div>
     <div class="mb-2">
-      <textarea name="description" class="form-control" placeholder="Task description"></textarea>
+      <textarea
+        name="description"
+        class="form-control"
+        placeholder="Task description"
+      ></textarea>
     </div>
     <button type="submit" class="btn btn-success">Add Task</button>
   </form>
@@ -16,23 +26,38 @@
       <tr>
         <th>Task</th>
         <th>Description</th>
+        <th>Created At</th>
         <th>Status</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
       {{#each tasks}}
-      <tr>
-        <td>{{this.title}}</td>
-        <td>{{this.description}}</td>
-        <td>{{#if this.completed}} ✅ Completed {{else}} ⏳ Pending {{/if}}</td>
-        <td>
-          <a href="/tasks/edit/{{this._id}}" class="btn btn-warning btn-sm">Edit</a>
-          <form action="/tasks/delete/{{this._id}}" method="POST" class="d-inline">
-            <button type="submit" id="delete-task-button" class="delete-task-button btn btn-danger btn-sm">Delete</button>
-          </form>
-        </td>
-      </tr>
+        <tr>
+          <td>{{this.title}}</td>
+          <td>{{this.description}}</td>
+          <td>{{formatDate this.createdAt}}</td>
+          <!-- Format the date -->
+          <td>{{#if this.completed}} ✅ Completed {{else}}
+              ⏳ Pending
+            {{/if}}</td>
+          <td>
+            <a
+              href="/tasks/edit/{{this._id}}"
+              class="btn btn-warning btn-sm"
+            >Edit</a>
+            <form
+              action="/tasks/delete/{{this._id}}"
+              method="POST"
+              class="d-inline"
+            >
+              <button
+                type="submit"
+                class="delete-task-button btn btn-danger btn-sm"
+              >Delete</button>
+            </form>
+          </td>
+        </tr>
       {{/each}}
     </tbody>
   </table>
